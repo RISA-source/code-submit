@@ -16,8 +16,8 @@ Requires Python 3.8+.
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-repo/codesubmit.git
-cd codesubmit
+git clone https://github.com/your-repo/code-submit.git
+cd code-submit
 
 # Install
 pip install .
