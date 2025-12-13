@@ -1,0 +1,11 @@
+project:
+  title: Demo Assignment
+  author: Test User
+
+input:
+  root: .
+  extensions: [.py]
+
+execution:
+  enabled: true
+  timeout: 5

@@ -1,0 +1,18 @@
+project:
+  title: Workshop 4
+  course: OOP with Java
+  author: Rishi Saraff
+
+input:
+  root: D:\EclipseDocxs\Session1\src\Workshop4
+  extensions: [.py, .java]
+
+execution:
+  enabled: true
+  timeout: 5
+  stdin_input: "" # Text to feed into stdin for all scripts (prevents hangs)
+
+
+output:
+  format: pdf
+  include_screenshots: false

@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: codesubmit
+Version: 0.1.0
+Summary: A CLI tool to convert executable code into submission-ready academic documents.
+Author-email: CodeSubmit Team <author@example.com>
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: click
+Requires-Dist: pyyaml
