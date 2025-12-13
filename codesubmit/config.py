@@ -13,6 +13,7 @@ class Config:
     execution_enabled: bool = True
     timeout: int = 5
     stdin_input: str = ""
+    interactive: bool = False
 
 def load_config(path: str) -> Config:
     if not os.path.exists(path):
@@ -34,5 +35,6 @@ def load_config(path: str) -> Config:
         input_file=inp.get("input_file"),
         execution_enabled=exe.get("enabled", True),
         timeout=exe.get("timeout", 5),
-        stdin_input=exe.get("stdin_input", "")
+        stdin_input=exe.get("stdin_input", ""),
+        interactive=exe.get("interactive", data.get("interactive", False))
     )

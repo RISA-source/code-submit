@@ -9,10 +9,8 @@ input:
 
 execution:
   enabled: true
-  timeout: 5
-  stdin_input: "" # Text to feed into stdin for all scripts (prevents hangs)
+  timeout: 100
+  # stdin_input: "" # Text to feed into stdin for all scripts (prevents hangs)
 
+interactive: true
 
-output:
-  format: pdf
-  include_screenshots: false

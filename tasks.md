@@ -43,3 +43,8 @@
     - [x] Create comprehensive `README.md` (Installation, Usage, Examples) <!-- id: 19 -->
     - [x] Create `CONTRIBUTING.md` (as DEVELOPER_GUIDE.md) <!-- id: 20 -->
     - [x] Update `walkthrough.md` with full tour of all features <!-- id: 21 -->
+
+## Phase 5: Interactive Execution
+- [x] Interactive Mode
+    - [x] Implement `Tee` threading logic for live I/O <!-- id: 22 -->
+    - [x] Add `interactive` flag to config and CLI <!-- id: 23 -->

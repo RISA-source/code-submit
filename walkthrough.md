@@ -23,6 +23,16 @@ The tool successfully:
 *   `submission.docx`: Word Document (verified generation).
 *   `submission.pdf`: PDF Document (verified generation via `xhtml2pdf`).
 
+### Features Verified
+1.  **Scanning**: Recursive detection of source files.
+2.  **Execution**: Capture of `stdout` and `stderr`.
+    *   **Interactive Mode**: Real-time I/O streaming with `execution.interactive: true`.
+3.  **Export**:
+    *   Markdown (Pure text).
+    *   DOCX (Microsoft Word).
+    *   PDF (Via `xhtml2pdf`).
+4.  **Integrity**: SHA256 Hashing of all files.
+
 ```markdown
 # Demo Assignment
 ## Metadata

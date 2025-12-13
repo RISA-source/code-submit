@@ -34,70 +34,31 @@ codesubmit/
 - Load `codesubmit.yaml` if present, otherwise use defaults.
 - Schema:
   - `project`: title, author, etc.
-  - `input`: root dir, extensions, `input_file` (optional global stdin).
-  - `execution`: enabled, timeout, `command_overrides` (dict).
+  - `input`: root dir, extensions.
+  - `execution`: enabled, timeout.
   - `output`: format.
 
 ### 2. Source Scanner (`scanner.py`)
 - `scan_directory(path, extensions, excludes)`
-- Returns a list of `SourceFile` objects.
-- **New**: Computes SHA256 hash of every source file immediately upon discovery.
+- Returns a list of `SourceFile` objects containing metadata (path, language, mod time).
 
 ### 3. Execution Engine (`executor.py`)
-- **Architecture Update**: Return a structured `ExecutionResult` object, not tuples.
-  ```python
-  @dataclass
-  class ExecutionResult:
-      stdout: str
-      stderr: str
-      exit_code: int
-      duration: float
-      command: str      # Exact command run
-      context: dict     # cwd, env vars subset
-      timed_out: bool
-  ```
-- **Input Handling**:
-  - Check config for input strategy.
-  - Options: `none` (default), `file` (feed a specific text file to stdin).
-  - If no input config is strict, default to empty stdin to prevent hangs.
-- **Runners**: Restricted to Python (`python`) and Java (`javac` + `java`) for Phase 1. 
+- Map extensions to runners (e.g., `.py` -> `python`, `.java` -> `javac + java`).
+- `run_code(file_path, timeout)`
+- Captures `stdout`, `stderr`, `exit_code`, and `duration`.
 
 ### 4. Output Generator (`formatters/`)
-- **Purity**: Formatter receives `List[Tuple[SourceFile, ExecutionResult]]`. It does *not* run code.
 - `MarkdownFormatter`:
   - Generates the Header block.
   - Loops through results:
-    - Writes file metadata (including Hash).
+    - Writes file metadata.
     - Writes code block.
     - Writes output block (if execution enabled).
-  - Appends a "Manifest" section with hashes of all files for integrity.
-- **[NEW] `DocxFormatter`**:
-  - Uses `python-docx` to generate native Word documents.
-  - Features:
-    - Page break between files.
-    - Monospace font (Courier New) for code blocks.
-    - Proper headers and footers.
-    - Syntax highlighting (optional/difficult in raw docx, maybe plain mono text).
-- **[NEW] `PdfFormatter`**:
-  - Strategy: Generate clean HTML with `jinja2`, then convert using `weasyprint`.
-  - **Fallback**: If `weasyprint` is missing, warn user and suggest DOCX or HTML.
-  - Styles: CSS for print (A4 page size, margins, font sizes).
 
-### 6. Documentation
-- **User Guide**:
-  - `generate` command usage with all flags.
-  - Configuration file reference (`codesubmit.yaml`).
-  - How to handle dependencies (Java, Python path).
-- **Developer Guide**:
-  - How to add new languages.
-  - How to write new formatters.
-
-### 7. Optional Features (Phase 3)
-- **Screenshots**:
-  - Use `Process` output to HTML, then `html2image` or `playwright`?
-  - *Decision*: Keep it simple. If screenshots are enabled, maybe just try to capture the terminal buffer if possible, or skip for now if too heavy. 
-  - *Refined Plan*: Focus on "Rock Solid Documentation" first as requested, treat screenshots as low priority unless explicitly pushed again.
-
+### 5. CLI (`cli.py`)
+- Commands:
+  - `generate`: Main command to run the flow.
+  - `init`: Create a sample `codesubmit.yaml`.
 
 ## Verification Plan
 

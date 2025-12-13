@@ -9,3 +9,4 @@ input:
 execution:
   enabled: true
   timeout: 5
+interactive: true

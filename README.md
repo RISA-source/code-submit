@@ -46,7 +46,7 @@ pip install xhtml2pdf
 
 2.  **Generate** the submission:
     ```bash
-    codesubmit generate
+    code-submit generate
     ```
     This creates `submission.md` by default.
 
