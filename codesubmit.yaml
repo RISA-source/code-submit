@@ -1,16 +1,16 @@
 project:
-  title: Workshop 4
-  course: OOP with Java
-  author: Rishi Saraff
+  title: Your Topic
+  course: Course Name
+  author: Your Name
 
 input:
-  root: D:\EclipseDocxs\Session1\src\Workshop4
-  extensions: [.py, .java]
+  root: file/location/
+  extensions: [.py, .java] # extensions for the files you want to read.
 
 execution:
-  enabled: true
+  enabled: true # executes each file it reads.
   timeout: 100
   # stdin_input: "" # Text to feed into stdin for all scripts (prevents hangs)
 
-interactive: true
+interactive: true # if there is user input in the code the user input is asked in real time to the executor of the command.
 
