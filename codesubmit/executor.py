@@ -115,38 +115,6 @@ def execute_files(files: List[SourceFile], config) -> List[Tuple[SourceFile, Opt
                 # Shared log for chronological order (optional, but nice)
                 # For now, we append input to captured_stdout to make it look like a terminal session.
                 
-                def stdin_forwarder():
-                    try:
-                        while proc.poll() is None:
-                            # We can't do a simple blocking read(1) on sys.stdin because we need to check proc.poll()
-                            # But standard input() is okay?
-                            # Problem: input() strips newlines.
-                            # Problem: sys.stdin.read(1) blocks forever.
-                            
-                            # On Windows, msvcrt.kbhit() is needed for non-blocking check.
-                            import msvcrt
-                            if msvcrt.kbhit():
-                                char = msvcrt.getwche() # Read and echo
-                                # If Enter, key is \r. Convert to \n.
-                                if char == '\r':
-                                    char = '\n'
-                                    print() # Echo newline
-                                
-                                try:
-                                    proc.stdin.write(char)
-                                    proc.stdin.flush()
-                                    captured_stdout.append(char) # Capture input too!
-                                except IOError:
-                                    break
-                            else:
-                                time.sleep(0.01)
-                    except ImportError:
-                         # Non-Windows fallback (Linux/Mac uses select, but user is on Windows)
-                         # Simple blocking input lines if msvcrt fails
-                         pass
-                    except Exception:
-                        pass
-                
                 # Actually, 'msvcrt' is low level console.
                 # Simpler: Just run a thread that reads input() and writes line-by-line?
                 # Does that show characters as they are typed? Yes, the terminal handles echo.
